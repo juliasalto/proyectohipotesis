@@ -10,7 +10,7 @@
 - Enlaces de interés:
     - [Dashboard en PowerBi](https://drive.google.com/file/d/1imqUqeg5PMAqadV52D5vBEr37rrdmGz3/view?usp=sharing)
     - [Presentación](https://drive.google.com/file/d/1bsM08YrfMaNCngJQjkju52jtgrDTvnZL/view?usp=sharing)
-    - [Video presentación]([https://www.loom.com/share/4e0ce6acfff74339ba9e869d82d0eeb0?sid=23899f0d-e760-4691-b04b-de92921f36e0](https://www.loom.com/share/e4ffba0636f24afcbdd8bf2223a213ba?sid=69d90723-e68d-4ab9-9db6-626d1e95f24c))
+    - [Video presentación](https://www.loom.com/share/cefa07de469041f79c391fc519218b3e?sid=5fdafcd1-ec99-491d-8354-9746024ba5a1)
     - [Google Colab - tests de hipótesis para características](https://colab.research.google.com/drive/1Cxjwd7OKF8yIDM7Qi91X4IioylGqlrgH#scrollTo=VBGkFieHx09R)
     - [Google Colab - test de normalidad de datos e hipótesis](https://colab.research.google.com/drive/19farAP8zDu5pr5-pDVn-fW7N1MrnR2BJ?usp=sharing#scrollTo=XW7xqKp6cSUL)
     - [Google Colab - regresión lineal](https://colab.research.google.com/drive/1btsSO5Gya90dgzPDz87_lr2cdawEsV9-?usp=sharing)
