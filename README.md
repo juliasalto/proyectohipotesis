@@ -35,7 +35,9 @@
 # Procesamiento y análisis:
   - # SQL en BigQuery
       - Nulos:
-        ```SELECT
+        
+        ```
+         SELECT
         track_id, track_name, artist_name, artist_count, released_year,released_month, released_day, in_spotify_playlists, in_spotify_charts, streams,
         count(track_id) AS null_track, count(track_name) AS null_track_name, count(artist_name) AS null_artist_name, count(artist_count) AS null_artist_count, count(released_year) AS null_year, count(released_month) AS null_month, count(released_day) AS null_day, count(in_spotify_playlists) AS null_playlists, count(in_spotify_charts) AS null_chart, count(streams) AS null_streams
          FROM
@@ -44,8 +46,11 @@
         track_id is null and track_name is null and artist_name is null and artist_count is null and released_year is null and released_month is null and released_day is null and in_spotify_playlists is null and in_spotify_charts is null and streams is null
         GROUP BY
         track_id, track_name, artist_name, artist_count, released_year,released_month, released_day, in_spotify_playlists, in_spotify_charts, streams```
+        
       - Duplicados:
-        ```SELECT
+        
+        ```
+        SELECT
         track_name, artist_name,
         count(*) AS cantidad
         FROM `saltoproyecto2hipotesis.datos_hipotesis.track_in_spotify`
@@ -53,17 +58,25 @@
         track_name, artist_name
         HAVING COUNT(*) > 1```
       - Fuera del alcance:
-        ```SELECT *
+        
+        ```
+        SELECT *
         EXCEPT(key, mode)
         FROM
         `saltoproyecto2hipotesis.datos_hipotesis.track_technical_info`
+        
       - Máximos, mínimos, promedios:
-        ```SELECT
+        
+        ```
+        SELECT
         MAX(`speechiness_%`) AS `max_speechiness_%`, MIN(`speechiness_%`) AS `min_speechiness_%`, AVG(`speechiness_%`) AS `avg_speechiness_%`, MAX(`danceability_%`) AS `max_danceability_%`, MIN(`danceability_%`) AS `min_danceability_%`, AVG(`danceability_%`) AS `avg_danceability_%`, MAX(`valence_%`) AS `max_valence_%`, MIN(`valence_%`) AS `min_valence_%`, AVG(`valence_%`) AS `avg_valence%`, MAX(`energy_%`) AS `max_energy_%`, MIN(`energy_%`) AS `min_energy_%`, AVG(`energy_%`) AS `avg_energy_%`,
         FROM
         `saltoproyecto2hipotesis.datos_hipotesis.track_technical_info```
+        
       - Unión de tablas:
-        ```SELECT spotify.*
+        
+        ```
+        SELECT spotify.*
         EXCEPT(track_name, artist_name,
         released_year,
         released_month,
@@ -90,9 +103,13 @@
         AND NOT track_name IN("SNAP",
         "About Damn Time",
         "Take My Breath",
-        "SPIT IN MY FACE!")```
+        "SPIT IN MY FACE!")
+        ```
+        
       - Cuartiles:
-        ```WITH
+        
+        ```
+        WITH
         cuartiles AS(
         SELECT
         new_streams,
@@ -108,14 +125,16 @@
         LEFT JOIN!
         cuartiles
         ON
-        unificado.new_streams=cuartiles.new_streams
+        unificado.new_streams=cuartiles.new_streams```
+        
       La query para la tabla consolidada que usé para la mayoría de los hitos se ve así
     
     ![Captura de Pantalla 2024-07-01 a la(s) 12 35 25](https://github.com/juliasalto/proyectohipotesis/assets/136622322/8ef9a2da-f026-4935-a9a3-0625d0948b9c)
 
     
       - Correlaciones:
-        ```SELECT
+        ```
+        SELECT
         CORR(new_streams, sum_playlists) AS correlation_value
         FROM
         `saltoproyecto2hipotesis.datos_hipotesis.4_view_unificado```
@@ -123,7 +142,8 @@
 # Hipótesis: Pruebas de Shapiro Wilk, Mann Whitney U, Regresión lineal
    - <I>Las canciones con un mayor BPM (Beats Por Minuto) tienen más éxito en términos de cantidad de streams en Spotify.</I>
      - Correlación: -0.0032001857690
-       ```SELECT
+       ```
+       SELECT
        CORR(new_streams, sum_playlists) AS correlation_value
        FROM
         `saltoproyecto2hipotesis.datos_hipotesis.4_view_unificado````
@@ -146,7 +166,8 @@
 
   - <i>Las canciones más populares en el ranking de Spotify también tienen un comportamiento similar en otras plataformas como Deezer.</i>
      - Correlación: 0.60767802013080952
-          ```SELECT
+          ```
+          SELECT
           CORR(in_deezer_charts, in_spotify_charts) as corr_charts,
           FROM
           `saltoproyecto2hipotesis.datos_hipotesis.4_view_unificado````
@@ -171,7 +192,8 @@
 
   - <i>La presencia de una canción en un mayor número de playlists se relaciona con un mayor número de streams.</i>
      - Correlación: 0.783680301078940
-       ```SELECT
+       ```
+       SELECT
        CORR(sum_playlists, new_streams) as corr_playlists,
        FROM
        `saltoproyecto2hipotesis.datos_hipotesis.4_view_unificado`
@@ -195,7 +217,8 @@
  
   - <i>Los artistas con un mayor número de canciones en Spotify tienen más streams.</i>
      - Correlación: 
-       ```WITH track_count AS (
+       ```
+       WITH track_count AS (
        SELECT
        cleaned_artist_name,
        COUNT(track_id) AS track_count,
@@ -235,7 +258,8 @@
            - Acoustciness: -0.00498576864951
            - Instrumentalness: -0.044039985415
       
-      ```SELECT
+      ```
+      SELECT
       CORR(new_streams, danceability) AS corr_danceability,
       CORR(new_streams, valence) AS corr_valence,
       CORR(new_streams, energy) AS corr_energy,
