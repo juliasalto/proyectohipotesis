@@ -37,15 +37,16 @@
       - Nulos:
         
         ```
-         SELECT
-        track_id, track_name, artist_name, artist_count, released_year,released_month, released_day, in_spotify_playlists, in_spotify_charts, streams,
-        count(track_id) AS null_track, count(track_name) AS null_track_name, count(artist_name) AS null_artist_name, count(artist_count) AS null_artist_count, count(released_year) AS null_year, count(released_month) AS null_month, count(released_day) AS null_day, count(in_spotify_playlists) AS null_playlists, count(in_spotify_charts) AS null_chart, count(streams) AS null_streams
-         FROM
-        saltoproyecto2hipotesis.datos_hipotesis.track_in_spotify
-        WHERE
-        track_id is null and track_name is null and artist_name is null and artist_count is null and released_year is null and released_month is null and released_day is null and in_spotify_playlists is null and in_spotify_charts is null and streams is null
-        GROUP BY
-        track_id, track_name, artist_name, artist_count, released_year,released_month, released_day, in_spotify_playlists, in_spotify_charts, streams```
+        (SELECT COUNT(*) FROM `saltoproyecto2hipotesis.datos_hipotesis.track_in_spotify` WHERE track_id is null) AS null_id,
+        (SELECT COUNT(*) FROM `saltoproyecto2hipotesis.datos_hipotesis.track_in_spotify` WHERE track_name is null) AS null_track,
+        (SELECT COUNT(*) FROM `saltoproyecto2hipotesis.datos_hipotesis.track_in_spotify` WHERE artist_name is null) AS null_name,
+        (SELECT COUNT(*) FROM `saltoproyecto2hipotesis.datos_hipotesis.track_in_spotify` WHERE artist_count is null) AS null_count,
+        (SELECT COUNT(*) FROM `saltoproyecto2hipotesis.datos_hipotesis.track_in_spotify` WHERE released_year is null) AS null_year,
+        (SELECT COUNT(*) FROM `saltoproyecto2hipotesis.datos_hipotesis.track_in_spotify` WHERE released_month is null) AS null_month,
+        (SELECT COUNT(*) FROM `saltoproyecto2hipotesis.datos_hipotesis.track_in_spotify` WHERE released_day is null) AS null_day,
+        (SELECT COUNT(*) FROM `saltoproyecto2hipotesis.datos_hipotesis.track_in_spotify` WHERE in_spotify_playlists is null) AS null_playlists,
+        (SELECT COUNT(*) FROM `saltoproyecto2hipotesis.datos_hipotesis.track_in_spotify` WHERE in_spotify_charts is null) AS null_charts,
+        (SELECT COUNT(*) FROM `saltoproyecto2hipotesis.datos_hipotesis.track_in_spotify` WHERE streams is null) AS null_streams
         
       - Duplicados:
         
@@ -57,6 +58,7 @@
         GROUP BY
         track_name, artist_name
         HAVING COUNT(*) > 1```
+        
       - Fuera del alcance:
         
         ```
